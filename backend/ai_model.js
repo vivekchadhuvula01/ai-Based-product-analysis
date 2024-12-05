@@ -26,7 +26,7 @@ const chain = model.pipe(parser)
 
 // console.log(res)
 // prompt templates
-const systemTemplate = "I PROVIDE A PRODUCT NAME AND SEARCH THROUGH THE INTERNET AND PROVIDE ME THE DEATIALS OF THE PRODUCT IN THE FORMAT OF TOP 5 BRANDS AND THEIR PRICE WITH A 3 SENTENCES OF DESCRIPTION {PRODUCT_NAME}:";
+const systemTemplate = "I PROVIDE A PRODUCT NAME AND SEARCH THROUGH THE INTERNET AND PROVIDE ME THE DEATIALS OF THE PRODUCT IN THE FORMAT OF TOP 5 BRANDS AND THEIR PRICE WITH A 3 SENTENCES OF DESCRIPTION {PRODUCT_NAME} NOTE:- AVOID THE PREVIEW FOR THE GENERATED RESULT.";
 const promptTemplate = ChatPromptTemplate.fromMessages([
     ["system", systemTemplate],
     ["user", "{PRODUCT_NAME}"],
@@ -37,7 +37,7 @@ const promptValue = await promptTemplate.invoke({
 
 });
 
-async function languagemodel(PRODUCT_NAME) {
+export async function languagemodel(PRODUCT_NAME) {
 
     const languageAssistChain = promptTemplate.pipe(model).pipe(parser);
     const result = await languageAssistChain.invoke({ PRODUCT_NAME: `${PRODUCT_NAME}` });
@@ -46,4 +46,4 @@ async function languagemodel(PRODUCT_NAME) {
     console.log(history)
 }
 
-languagemodel('EARPODS ');
+// languagemodel('EARPODS ');

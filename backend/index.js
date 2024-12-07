@@ -34,7 +34,7 @@ app.post('/product-analysis',async function (req, res) {
     res.render('index');
     // res.json({ message: `successfully fetched the product! ${req.body.product_name}` });
     const result = await languagemodel(req.body.product_name);
-    
+    console.log(result);
     // res.redirect('/product-analysis')
 
   } catch (error) {

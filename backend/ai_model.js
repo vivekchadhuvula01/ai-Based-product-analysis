@@ -40,9 +40,10 @@ async function languagemodel(PRODUCT_NAME) {
 
     const languageAssistChain = promptTemplate.pipe(model).pipe(parser);
     const result = await languageAssistChain.invoke({ PRODUCT_NAME: `${PRODUCT_NAME}` });
-    const history = []
-    history.push(result)
-    console.log(history)
+    // const history = []
+    // history.push(result)
+    // console.log(history)
+    return result
 }
 
 module.exports = { languagemodel }

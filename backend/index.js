@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 const port = process.env.PORT || 5000;
 
 app.listen(port, () =>
-  console.log(`listening on http://localhost:${port}`)
+  console.log(`listening on http://localhost:${port}/product-analysis`)
 );
 
 // app.get('/product-analysis', (req, res) => {
@@ -31,20 +31,23 @@ app.listen(port, () =>
 // })
 app.post('/product-analysis',async function (req, res) {
   try {
-    res.render('index');
+    // res.render('index');
+    const productName = req.body.product_name;
     // res.json({ message: `successfully fetched the product! ${req.body.product_name}` });
-    const result = await languagemodel(req.body.product_name);
+    const result = await languagemodel(productName);
+    res.render('index', { result });
     console.log(result);
     // res.redirect('/product-analysis')
+    // Render 'index.ejs' with the result data as a variable
 
   } catch (error) {
     console.log(error);
+    res.status(500).send('An error occurred during product analysis.');
   }
 });
 app.get('/product-analysis/', (req, res) => {
   // Fetch analysis data based on the product name (optional)
   // ...
-  res.json({message: 'product succesfully fetched'})
+  // res.json({message: 'product succesfully fetched'})
   res.render('index')
-
 });
